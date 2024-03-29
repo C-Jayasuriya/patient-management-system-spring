@@ -17,26 +17,43 @@ public class Doctor {
     private String speciality;
 
 
-    public String getSpecialization() {
-        return speciality;
+    public int getId() {
+        return id;
     }
 
-    public String getEmergencyContact(){
-        return emergencyContact;
-    }
-    public int getId() {
-        return id ;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
     @Override
     public String toString(){
         return "\nDoctor ID: " + getId() +
                 ", Name: " + getName() +
-                ", Speciality: " + getSpecialization() +
+                ", Speciality: " + getSpeciality() +
                 ", Emergency Contact Number: " + getEmergencyContact() ;
     }
 }
