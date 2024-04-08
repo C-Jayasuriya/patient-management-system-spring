@@ -1,9 +1,11 @@
 package com.efutures.Doctor;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.efutures.Patient.Patient;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Doctor {
@@ -11,11 +13,32 @@ public class Doctor {
     @GeneratedValue(
             strategy = GenerationType.AUTO
     )
+    @Column(
+            name = "doctor_id",
+            updatable = false
+    )
     private int id;
+    @Column(
+            name = "doctor_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String name;
-    private String emergencyContact;
-    private String speciality;
 
+    @Column(
+            name = "doctor_emergencyContact",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String emergencyContact;
+    @Column(
+            name = "doctor_speciality",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String speciality;
+    @ManyToMany
+    private Set<Patient> assignedPatients = new HashSet<>();
 
     public int getId() {
         return id;
@@ -49,11 +72,22 @@ public class Doctor {
         this.speciality = speciality;
     }
 
+    public Set<Patient> getAssignedPatients() {
+        return assignedPatients;
+    }
+
+    public void setAssignedPatients(Set<Patient> assignedPatients) {
+        this.assignedPatients = assignedPatients;
+    }
+
     @Override
-    public String toString(){
-        return "\nDoctor ID: " + getId() +
-                ", Name: " + getName() +
-                ", Speciality: " + getSpeciality() +
-                ", Emergency Contact Number: " + getEmergencyContact() ;
+    public String toString() {
+        return "Doctor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", emergencyContact='" + emergencyContact + '\'' +
+                ", speciality='" + speciality + '\'' +
+                ", assignedPatients=" + assignedPatients +
+                '}';
     }
 }

@@ -1,33 +1,16 @@
 package com.efutures.StaffMember;
-import com.efutures.StaffMember.StaffMemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class StaffMemberService {
+public interface StaffMemberService {
 
-    private final StaffMemberRepository staffMemberRepository;
+    public void addStaffMember(StaffMember staffMember);
 
-    @Autowired
-    public StaffMemberService(StaffMemberRepository staffMemberRepository) {
-        this.staffMemberRepository = staffMemberRepository;
-    }
+    public StaffMember getStaffMemberById(int id);
 
-    public List<StaffMember> getAllStaffMembers() {
-        return staffMemberRepository.findAll();
-    }
+    public List<StaffMember> getAllStaffMembers();
+    public void deleteStaffMemberById(int id);
 
-    public StaffMember getStaffMemberById(int id) {
-        return staffMemberRepository.findById(id).orElse(null);
-    }
 
-    public void saveStaffMember(StaffMember staffMember) {
-        staffMemberRepository.save(staffMember);
-    }
-
-    public void deleteStaffMemberById(int id) {
-        staffMemberRepository.deleteById(id);
-    }
+    public void updateStaffMember(Integer id, StaffMember updatedStaffMember);
 }

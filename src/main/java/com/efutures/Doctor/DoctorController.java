@@ -1,15 +1,16 @@
 package com.efutures.Doctor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class DoctorController {
-
+    @Qualifier("doctorServiceImpl")
     @Autowired
-    private DoctorService doctorService;
+    DoctorService doctorService;
 
     @PostMapping("/doctor")
     public void saveDoctor(@RequestBody Doctor doctor) {

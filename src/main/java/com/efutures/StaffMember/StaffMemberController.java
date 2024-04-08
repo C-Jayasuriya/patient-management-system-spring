@@ -1,38 +1,39 @@
 package com.efutures.StaffMember;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/staffMembers")
 public class StaffMemberController {
 
-    private final StaffMemberService staffMemberService;
-    //
     @Autowired
-    public StaffMemberController(StaffMemberService staffMemberService) {
-        this.staffMemberService = staffMemberService;
-    }
+    private StaffMemberServiceImpl staffMemberServiceImpl;
 
-    @GetMapping
-    public List<StaffMember> getAllStaffMembers() {
-        return staffMemberService.getAllStaffMembers();
-    }
-
-    @GetMapping("/{id}")
-    public StaffMember getStaffMemberById(@PathVariable int id) {
-        return staffMemberService.getStaffMemberById(id);
-    }
-
-    @PostMapping
+    @PostMapping("/staffMember")
     public void saveStaffMember(@RequestBody StaffMember staffMember) {
-        staffMemberService.saveStaffMember(staffMember);
+        staffMemberServiceImpl.addStaffMember(staffMember);
+    }
+    @GetMapping("/staffMember/{id}")
+    public StaffMember getStaffMember(@PathVariable("id") Integer id){
+        StaffMember staffMemberById = staffMemberServiceImpl.getStaffMemberById(id);
+        return staffMemberById;
+    }
+    @GetMapping("/staffMembers")
+    public List<StaffMember> getAllDoctors() {
+        return staffMemberServiceImpl.getAllStaffMembers();
+    }
+    @PutMapping("/staffMember/{id}")
+    public void updateStaffMember(@PathVariable("id") Integer id, @RequestBody StaffMember updatedStaffMember) {
+        staffMemberServiceImpl.updateStaffMember(id, updatedStaffMember);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteStaffMemberById(@PathVariable int id) {
-        staffMemberService.deleteStaffMemberById(id);
+    @DeleteMapping("/staffMember/{id}")
+    public void deleteStaffMember(@PathVariable("id") Integer id) {
+        staffMemberServiceImpl.deleteStaffMemberById(id);
     }
+
 }
+

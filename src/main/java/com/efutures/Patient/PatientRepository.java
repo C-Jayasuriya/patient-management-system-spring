@@ -1,4 +1,9 @@
 package com.efutures.Patient;
 
-public interface PatientRepository {
+import com.efutures.Doctor.Doctor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PatientRepository extends JpaRepository<Patient, Integer> {
 }
