@@ -1,5 +1,6 @@
-package com.efutures.StaffMember;
+package com.efutures.Repository;
 
+import com.efutures.Entity.StaffMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

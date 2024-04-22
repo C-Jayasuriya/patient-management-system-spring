@@ -1,14 +1,19 @@
-package com.efutures.Doctor;
+package com.efutures.ServiceImpl;
 
+import com.efutures.Repository.DoctorRepository;
+import com.efutures.Entity.Doctor;
+import com.efutures.Service.DoctorService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Profile(value = "dev")
 @Transactional
-public class DoctorServiceImpl implements DoctorService{
+public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository; // Dependency Injection
 
@@ -16,7 +21,10 @@ public class DoctorServiceImpl implements DoctorService{
     public DoctorServiceImpl(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
     }
-
+    @Override
+    public void log(){
+        System.out.println("Inside DoctorServiceImpl");
+    }
     @Override
     public void addDoctor(Doctor doctor) {
         doctorRepository.save(doctor);
@@ -43,6 +51,7 @@ public class DoctorServiceImpl implements DoctorService{
             doctorRepository.save(existingDoctor);
         }
     }
+
 
     @Override
     public void deleteDoctorById(Integer id) {

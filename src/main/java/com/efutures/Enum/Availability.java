@@ -1,4 +1,4 @@
-package com.efutures.Availability;
+package com.efutures.Enum;
 
 
 public enum Availability {

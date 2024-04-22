@@ -1,19 +1,29 @@
-package com.efutures.StaffMember;
+package com.efutures.ServiceImpl;
+import com.efutures.Entity.StaffMember;
+import com.efutures.Repository.StaffMemberRepository;
+import com.efutures.Service.StaffMemberService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Profile(value = "dev")
 @Transactional
-public class StaffMemberServiceImpl implements StaffMemberService{
+public class StaffMemberServiceImpl implements StaffMemberService {
 
     private final StaffMemberRepository staffMemberRepository;
 
     @Autowired
     public StaffMemberServiceImpl(StaffMemberRepository staffMemberRepository) {
         this.staffMemberRepository = staffMemberRepository;
+    }
+
+    @Override
+    public void log() {
+        System.out.println("Inside StaffMemberServiceImpl");
     }
 
     public void addStaffMember(StaffMember staffMember) {

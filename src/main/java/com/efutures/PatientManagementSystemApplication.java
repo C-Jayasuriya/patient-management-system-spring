@@ -13,8 +13,9 @@ public class PatientManagementSystemApplication {
 
 		SpringApplication.run(PatientManagementSystemApplication.class, args);
 	}
+
 	@GetMapping // Get something out of the server
-	public String hello(){
+	public String hello() {
 		return "Welcome to Asiri Laboratories";
 	}
 }

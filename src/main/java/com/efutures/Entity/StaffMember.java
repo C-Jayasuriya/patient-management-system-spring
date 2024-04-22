@@ -1,6 +1,6 @@
-package com.efutures.StaffMember;
+package com.efutures.Entity;
 
-import com.efutures.Availability.Availability;
+import com.efutures.Enum.Availability;
 import jakarta.persistence.*;
 
 @Entity

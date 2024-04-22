@@ -1,4 +1,4 @@
-package com.efutures.TestType;
+package com.efutures.Enum;
 
 public enum TestType {
     CBC,

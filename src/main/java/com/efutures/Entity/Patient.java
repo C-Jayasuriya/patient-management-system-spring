@@ -1,11 +1,9 @@
-package com.efutures.Patient;
+package com.efutures.Entity;
 
-import com.efutures.Doctor.Doctor;
-import com.efutures.TestType.TestType;
+import com.efutures.Enum.TestType;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,7 +41,7 @@ public class Patient {
     )
     private boolean reportStatus = false;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "patient_doctor",
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "doctor_id"))

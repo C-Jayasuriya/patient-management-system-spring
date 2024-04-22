@@ -1,23 +1,48 @@
-package com.efutures.Patient;
+package com.efutures.ServiceImpl;
 
+import com.efutures.Entity.Doctor;
+import com.efutures.Entity.Patient;
+import com.efutures.Repository.PatientRepository;
+import com.efutures.Service.DoctorService;
+import com.efutures.Service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
+@Profile(value = "dev")
 @Transactional
 public class PatientServiceImpl implements PatientService {
-    @Autowired
 
-    private PatientRepository patientRepository;
-    public PatientServiceImpl(PatientRepository patientRepository) {
+    private final PatientRepository patientRepository;
+    private final DoctorService doctorService;
+
+    @Autowired
+    public PatientServiceImpl(PatientRepository patientRepository, DoctorService doctorService) {
         this.patientRepository = patientRepository;
+        this.doctorService = doctorService;
     }
 
     @Override
-    public void addPatient(Patient patient) {
+    public void log() {
+        System.out.println("Inside PatientServiceImpl");
+    }
+
+    @Override
+    public void addPatient(Patient patient, Set<Integer> doctorIds) {
+        Set<Doctor> doctors = new HashSet<>();
+        for (Integer doctorId : doctorIds) {
+            Doctor doctor = doctorService.getDoctorById(doctorId);
+            if (doctor != null) {
+                doctors.add(doctor);
+            }
+        }
+        patient.setAssignedDoctors(doctors);
         patientRepository.save(patient);
     }
 
@@ -28,6 +53,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> getAllPatients() {
+        patientRepository.findAll().forEach(patient -> patient.getAssignedDoctors().size());
         return patientRepository.findAll();
     }
 

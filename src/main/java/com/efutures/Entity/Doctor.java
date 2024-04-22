@@ -1,10 +1,9 @@
-package com.efutures.Doctor;
+package com.efutures.Entity;
 
-import com.efutures.Patient.Patient;
+import com.efutures.Entity.Patient;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
