@@ -21,9 +21,9 @@ public class PatientController {
         patientService.log();
     }
     @PostMapping("/patient")
-    public void savePatient(@RequestBody PatientDto patientDto, @RequestParam("doctorIds") Set<Integer> doctorIds) {
+    public void savePatient(@RequestBody PatientDto patientDto) {
         Patient convertedPatient = patientUtil.convert(patientDto);
-        patientService.addPatient(convertedPatient, doctorIds);
+        patientService.addPatient(convertedPatient,patientDto.getAssignedDoctors());
     }
 
 

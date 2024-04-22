@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Profile(value = "dev")
@@ -35,13 +36,17 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void addPatient(Patient patient, Set<Integer> doctorIds) {
-        Set<Doctor> doctors = new HashSet<>();
+        /*Set<Doctor> doctors = new HashSet<>();
         for (Integer doctorId : doctorIds) {
             Doctor doctor = doctorService.getDoctorById(doctorId);
             if (doctor != null) {
                 doctors.add(doctor);
             }
-        }
+        }*/
+        Set<Doctor> doctors = doctorIds.stream().
+                map(id -> doctorService.getDoctorById(id)).
+                collect(Collectors.toSet());
+
         patient.setAssignedDoctors(doctors);
         patientRepository.save(patient);
     }
